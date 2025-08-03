@@ -1,0 +1,101 @@
+.tiptap.ProseMirror {
+    --blockquote-bg-color: var(--tt-gray-light-900);
+    --link-text-color: var(--tt-brand-color-500);
+    --separator-color: var(--tt-gray-light-a-200);
+    --thread-text: var(--tt-gray-light-900);
+    --placeholder-color: var(--tt-gray-light-a-400);
+
+    .dark & {
+        --blockquote-bg-color: var(--tt-gray-dark-900);
+        --link-text-color: var(--tt-brand-color-400);
+        --separator-color: var(--tt-gray-dark-a-200);
+        --thread-text: var(--tt-gray-dark-900);
+        --placeholder-color: var(--tt-gray-dark-a-400);
+    }
+
+    white-space: pre-wrap;
+    outline: none;
+    caret-color: var(--tt-cursor-color, black);
+    word-break: break-word;
+    // ✅ Đảm bảo không bị cách dòng đầu
+    p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    // ✅ Tô đậm, nghiêng, gạch chân...
+    strong {
+        font-weight: bold;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    u {
+        text-decoration: underline;
+    }
+
+    s {
+        text-decoration: line-through;
+    }
+
+    a {
+        color: var(--link-text-color);
+        text-decoration: underline;
+    }
+
+    code {
+        background: #f4f4f4;
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.9em;
+    }
+
+    blockquote {
+        background-color: var(--blockquote-bg-color);
+        border-left: 4px solid var(--link-text-color);
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        font-style: italic;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--separator-color);
+        margin: 1em 0;
+    }
+    // ✅ Placeholder cho dòng đầu tiên
+    > p.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: var(--placeholder-color);
+        pointer-events: none;
+        height: 0;
+        font-style: italic;
+    }
+    // ✅ Placeholder cho trường hợp trailing break
+    .is-empty[data-placeholder]:has(> .ProseMirror-trailingBreak)::before {
+        content: attr(data-placeholder);
+        position: absolute;
+        color: var(--placeholder-color);
+        pointer-events: none;
+        font-style: italic;
+    }
+
+    ul,
+    ol {
+        padding-left: 1.5em;
+    }
+
+    li {
+        margin: 0.3em 0;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1em 0 0.5em;
+}
